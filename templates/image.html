@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1 class="page-title">
+        🖼 Image Steganography
+    </h1>
+
+    <div class="grid">
+
+        <!-- Encode -->
+
+        <div class="box">
+
+            <h2>🔒 Encode Image</h2>
+
+            <form action="/image/encode" method="POST" enctype="multipart/form-data">
+
+                <div class="upload-area">
+
+                    <input
+                        type="file"
+                        id="encodeImage"
+                        name="image"
+                        accept="image/*"
+                        required>
+
+                    <label for="encodeImage">
+                        📁 Click to Upload Image
+                    </label>
+
+                    <img
+                        id="encodePreview"
+                        class="preview"
+                        style="display:none;">
+
+                </div>
+
+                <label>Secret Message</label>
+
+                <textarea
+                    name="message"
+                    rows="6"
+                    placeholder="Enter Secret Message..."
+                    required></textarea>
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter Password"
+                    required>
+
+                <button type="submit">
+                    🔒 Encode & Download
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- Decode -->
+
+        <div class="box">
+
+            <h2>🔓 Decode Image</h2>
+
+            <form action="/image/decode" method="POST" enctype="multipart/form-data">
+
+                <div class="upload-area">
+
+                    <input
+                        type="file"
+                        id="decodeImage"
+                        name="image"
+                        accept="image/*"
+                        required>
+
+                    <label for="decodeImage">
+                        📁 Upload Secret Image
+                    </label>
+
+                    <img
+                        id="decodePreview"
+                        class="preview"
+                        style="display:none;">
+
+                </div>
+
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Enter Password"
+                    required>
+
+                <button type="submit">
+                    🔓 Decode Secret
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+{% endblock %}

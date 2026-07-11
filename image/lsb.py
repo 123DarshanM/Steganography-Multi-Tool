@@ -1,90 +1,107 @@
 from PIL import Image
+import struct
 
 
-END_MARKER = "#####END#####"
+def _bytes_to_bits(data):
+    bits = []
+
+    for byte in data:
+        for i in range(7, -1, -1):
+            bits.append((byte >> i) & 1)
+
+    return bits
 
 
-def text_to_binary(text):
-    return ''.join(format(ord(c), '08b') for c in text)
+def _bits_to_bytes(bits):
+
+    output = bytearray()
+
+    for i in range(0, len(bits), 8):
+
+        byte = 0
+
+        for bit in bits[i:i+8]:
+            byte = (byte << 1) | bit
+
+        output.append(byte)
+
+    return bytes(output)
 
 
-def binary_to_text(binary):
-    chars = []
+def calculate_capacity(image_path):
 
-    for i in range(0, len(binary), 8):
-        byte = binary[i:i+8]
+    image = Image.open(image_path).convert("RGB")
 
-        if len(byte) == 8:
-            chars.append(chr(int(byte, 2)))
+    width, height = image.size
 
-    return ''.join(chars)
+    total_bits = width * height * 3
+
+    # Reserve 4 bytes for the length header
+    return (total_bits // 8) - 4
 
 
 def encode_image(input_image, output_image, secret_text):
 
-    image = Image.open(input_image)
-
-    image = image.convert("RGB")
+    image = Image.open(input_image).convert("RGB")
 
     pixels = list(image.getdata())
 
-    secret_text += END_MARKER
+    payload = secret_text.encode("utf-8")
 
-    binary = text_to_binary(secret_text)
+    header = struct.pack(">I", len(payload))
 
-    if len(binary) > len(pixels) * 3:
-        raise ValueError("Message is too large for this image.")
+    final_data = header + payload
 
-    new_pixels = []
+    bits = _bytes_to_bits(final_data)
+
+    if len(bits) > len(pixels) * 3:
+        raise ValueError("Image does not have enough capacity.")
 
     bit_index = 0
+
+    new_pixels = []
 
     for pixel in pixels:
 
         r, g, b = pixel
 
-        if bit_index < len(binary):
-            r = (r & ~1) | int(binary[bit_index])
-            bit_index += 1
+        rgb = [r, g, b]
 
-        if bit_index < len(binary):
-            g = (g & ~1) | int(binary[bit_index])
-            bit_index += 1
+        for i in range(3):
 
-        if bit_index < len(binary):
-            b = (b & ~1) | int(binary[bit_index])
-            bit_index += 1
+            if bit_index < len(bits):
 
-        new_pixels.append((r, g, b))
+                rgb[i] = (rgb[i] & 0xFE) | bits[bit_index]
+
+                bit_index += 1
+
+        new_pixels.append(tuple(rgb))
 
     image.putdata(new_pixels)
 
     image.save(output_image)
 
-    print("Image saved:", output_image)
-
 
 def decode_image(image_path):
 
-    image = Image.open(image_path)
-
-    image = image.convert("RGB")
+    image = Image.open(image_path).convert("RGB")
 
     pixels = list(image.getdata())
 
-    binary = ""
+    bits = []
 
     for pixel in pixels:
 
-        binary += str(pixel[0] & 1)
-        binary += str(pixel[1] & 1)
-        binary += str(pixel[2] & 1)
+        bits.append(pixel[0] & 1)
+        bits.append(pixel[1] & 1)
+        bits.append(pixel[2] & 1)
 
-    text = binary_to_text(binary)
+    header = _bits_to_bytes(bits[:32])
 
-    end = text.find(END_MARKER)
+    length = struct.unpack(">I", header)[0]
 
-    if end == -1:
-        return ""
+    payload_bits = bits[32:32 + (length * 8)]
 
-    return text[:end]
+    payload = _bits_to_bytes(payload_bits)
+
+    return payload.decode("utf-8")

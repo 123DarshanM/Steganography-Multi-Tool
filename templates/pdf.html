@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<h1 class="page-title">
+📄 PDF Steganography
+</h1>
+
+<div class="grid">
+
+<!-- Encode -->
+
+<div class="box">
+
+<h2>🔒 Encode PDF</h2>
+
+<form action="/pdf/encode" method="POST" enctype="multipart/form-data">
+
+<div class="upload-area">
+
+<input
+type="file"
+id="encodePDF"
+name="pdf"
+accept=".pdf,application/pdf"
+required>
+
+<label for="encodePDF">
+📄 Click to Upload PDF
+</label>
+
+</div>
+
+<label>Secret Message</label>
+
+<textarea
+name="message"
+rows="6"
+placeholder="Enter Secret Message..."
+required></textarea>
+
+<label>Password</label>
+
+<input
+type="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+<button type="submit">
+🔒 Encode & Download
+</button>
+
+</form>
+
+</div>
+
+<!-- Decode -->
+
+<div class="box">
+
+<h2>🔓 Decode PDF</h2>
+
+<form action="/pdf/decode" method="POST" enctype="multipart/form-data">
+
+<div class="upload-area">
+
+<input
+type="file"
+id="decodePDF"
+name="pdf"
+accept=".pdf,application/pdf"
+required>
+
+<label for="decodePDF">
+📄 Upload Secret PDF
+</label>
+
+</div>
+
+<label>Password</label>
+
+<input
+type="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+<button type="submit">
+🔓 Decode Secret
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

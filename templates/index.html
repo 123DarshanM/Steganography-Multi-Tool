@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero">
+
+    <h1>Hide Secret Messages Securely</h1>
+
+    <p>
+        One Toolkit • Multiple Steganography Techniques
+    </p>
+
+</section>
+
+<section class="cards">
+
+    <div class="card">
+
+        <div class="icon">🖼</div>
+
+        <h2>Image</h2>
+
+        <p>
+            Hide messages inside PNG/BMP images using LSB encoding.
+        </p>
+
+        <a href="/image">
+            <button>Open</button>
+        </a>
+
+    </div>
+<div class="card">
+
+<div class="icon">
+
+🎵
+
+</div>
+
+<h2>Audio</h2>
+
+<p>
+
+Hide encrypted messages inside WAV audio files.
+
+</p>
+
+<a href="/audio">
+
+<button>
+
+Open
+
+</button>
+
+</a>
+
+</div>
+    </div>
+
+<div class="card">
+
+<div class="icon">
+
+</div>
+
+<h2>PDF</h2>
+
+<p>
+
+Hide encrypted messages inside PDF metadata.
+
+</p>
+
+<a href="/pdf">
+
+<button>
+
+Open
+
+</button>
+
+</a>
+
+<div class="card">
+
+<div class="icon">
+
+📝
+
+</div>
+
+<h2>Text</h2>
+
+<p>
+
+Hide encrypted messages using Zero Width Unicode characters.
+
+</p>
+
+<a href="/text">
+
+<button>
+
+Open
+
+</button>
+
+</a>
+
+</div>
+</section>
+
+{% endblock %}

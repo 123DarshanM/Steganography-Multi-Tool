@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<h1 class="page-title">
+📝 Zero Width Unicode Text Steganography
+</h1>
+
+<div class="grid">
+
+<!-- Encode -->
+
+<div class="box">
+
+<h2>🔒 Encode Text</h2>
+
+<form action="/text/encode" method="POST">
+
+<label>Cover Text</label>
+
+<textarea
+name="cover"
+rows="5"
+placeholder="Enter normal text..."
+required></textarea>
+
+<label>Secret Message</label>
+
+<textarea
+name="message"
+rows="5"
+placeholder="Enter hidden message..."
+required></textarea>
+
+<label>Password</label>
+
+<input
+type="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+<button type="submit">
+🔒 Encode Text
+</button>
+
+</form>
+
+</div>
+
+<!-- Decode -->
+
+<div class="box">
+
+<h2>🔓 Decode Text</h2>
+
+<form action="/text/decode" method="POST">
+
+<label>Stego Text</label>
+
+<textarea
+name="stego"
+rows="8"
+placeholder="Paste encoded text here..."
+required></textarea>
+
+<label>Password</label>
+
+<input
+type="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+<button type="submit">
+🔓 Decode Text
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

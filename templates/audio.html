@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+<h1 class="page-title">
+🎵 Audio Steganography
+</h1>
+
+<div class="grid">
+
+<div class="box">
+
+<h2>🔒 Encode Audio</h2>
+
+<form action="/audio/encode" method="POST" enctype="multipart/form-data">
+
+<div class="upload-area">
+
+<input
+type="file"
+id="encodeAudio"
+name="audio"
+accept="audio/*"
+required>
+
+<label for="encodeAudio">
+🎵 Click to Upload Audio File
+</label>
+
+</div>
+
+<label>Secret Message</label>
+
+<textarea
+name="message"
+rows="6"
+placeholder="Enter Secret Message..."
+required></textarea>
+
+<label>Password</label>
+
+<input
+type="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+<button type="submit">
+🔒 Encode & Download
+</button>
+
+</form>
+
+</div>
+
+<div class="box">
+
+<h2>🔓 Decode Audio</h2>
+
+<form action="/audio/decode" method="POST" enctype="multipart/form-data">
+
+<div class="upload-area">
+
+<input
+type="file"
+id="decodeAudio"
+name="audio"
+accept="audio/*"
+required>
+
+<label for="decodeAudio">
+🎵 Upload Secret Audio
+</label>
+
+</div>
+
+<label>Password</label>
+
+<input
+type="password"
+name="password"
+placeholder="Enter Password"
+required>
+
+<button type="submit">
+🔓 Decode Secret
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}
