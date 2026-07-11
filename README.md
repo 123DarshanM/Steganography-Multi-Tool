@@ -11,17 +11,7 @@ A Flask-based Cybersecurity Project for hiding encrypted messages inside differe
 - 🔒 AES-256 Encryption
 - 🔑 Password Protection
 
----
 
-## Technologies
-
-- Python
-- Flask
-- Pillow
-- PyPDF2
-- Cryptography
-
----
 
 ## Installation
 
@@ -39,28 +29,39 @@ pip install -r requirements.txt
 python app.py
 ```
 
----
 
-## Project Structure
 
-```
-audio/
-core/
-image/
-pdf/
-text/
-templates/
-static/
-```
+# 📷 Screenshots
+
+## 🏠 Home Page
+
+![Home](screenshots/home.png)
 
 ---
 
-## Screenshots
+## 🖼 Image Steganography
 
-(Add screenshots here)
+![Image](screenshots/image.png)
 
 ---
 
+## 🎵 Audio Steganography
+
+![Audio](screenshots/audio.png)
+
+---
+
+## 📄 PDF Steganography
+
+![PDF](screenshots/pdf.png)
+
+---
+
+## 📝 Zero Width Unicode Text
+
+![Text](screenshots/text.png)
+
+---
 
 ## Author
 
