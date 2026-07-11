@@ -4,7 +4,6 @@
 <img src="https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python">
 <img src="https://img.shields.io/badge/Flask-Web%20App-black?style=for-the-badge&logo=flask">
 <img src="https://img.shields.io/badge/AES-256-green?style=for-the-badge">
-<img src="https://img.shields.io/badge/License-MIT-orange?style=for-the-badge">
 
 </p>
 
