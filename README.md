@@ -26,7 +26,7 @@ A Flask-based Cybersecurity Project for hiding encrypted messages inside differe
 ## Installation
 
 ```bash
-git clone https://github.com/123DarshanM/Steganography-Multi-Tool
+git clone https://github.com/123DarshanM/Steganography-Multi-Tool.git
 
 cd Steganography-Multi-Tool
 
